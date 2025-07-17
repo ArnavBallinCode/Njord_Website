@@ -61,8 +61,8 @@
 
         .diagram-point {
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             border-radius: 50%;
             cursor: pointer;
@@ -72,12 +72,35 @@
             justify-content: center;
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
             border: 3px solid rgba(255, 255, 255, 0.8);
+            z-index: 20;
+            pointer-events: auto;
+            animation: diagramPulse 1.5s infinite;
+        }
+
+        @keyframes diagramPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 16px rgba(59, 130, 246, 0.1);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.0);
+            }
         }
 
         .diagram-point:hover {
             transform: scale(1.3);
             box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
             background: linear-gradient(135deg, #6366f1, #a855f7);
+        }
+
+        .diagram-point.selected {
+            box-shadow: 0 0 0 4px #f59e0b, 0 8px 25px rgba(59, 130, 246, 0.6);
+            border-color: #f59e0b;
+        }
         }
 
         .diagram-point .plus-sign {
@@ -155,7 +178,7 @@
     <header
         class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-6xl mx-auto px-6 transition-all duration-500">
         <nav id="navbar"
-            class="bg-white/30 backdrop-blur-2xl rounded-2xl border border-white/30 shadow-2xl shadow-blue-500/20 px-8 py-4 transition-all duration-500">
+            class="bg-black/30 backdrop-blur-2xl rounded-2xl border border-black/20 shadow-2xl shadow-black/30 px-8 py-4 transition-all duration-500">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
                 <h1
                     class="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
@@ -560,22 +583,21 @@
                 const maxScroll = 300; // Reduced for faster transition
 
                 // Calculate opacity based on scroll position (0.2 to 0.85)
-                const opacity = Math.min(0.85, 0.2 + (scrollY / maxScroll) * 0.65);
-
-                // Calculate border and shadow opacity
-                const borderOpacity = Math.min(0.6, 0.3 + (scrollY / maxScroll) * 0.3);
-                const shadowOpacity = Math.min(0.4, 0.2 + (scrollY / maxScroll) * 0.2);
+                const opacity = Math.min(0.55, 0.18 + (scrollY / maxScroll) * 0.37);
+                // Lower border and shadow opacity for more glass effect
+                const borderOpacity = Math.min(0.32, 0.12 + (scrollY / maxScroll) * 0.17);
+                const shadowOpacity = Math.min(0.22, 0.09 + (scrollY / maxScroll) * 0.13);
 
                 if (navbar) {
-                    navbar.style.backgroundColor = `rgba(255, 255, 255, ${opacity})`;
-                    navbar.style.borderColor = `rgba(255, 255, 255, ${borderOpacity})`;
-                    navbar.style.boxShadow = `0 25px 50px -12px rgba(59, 130, 246, ${shadowOpacity}), 0 0 0 1px rgba(255, 255, 255, ${borderOpacity * 0.5})`;
+                    navbar.style.backgroundColor = `rgba(20, 20, 20, ${opacity})`;
+                    navbar.style.borderColor = `rgba(20, 20, 20, ${borderOpacity})`;
+                    navbar.style.boxShadow = `0 25px 50px -12px rgba(0,0,0,${shadowOpacity}), 0 0 0 1px rgba(20,20,20,${borderOpacity * 0.5})`;
                 }
 
                 if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.style.backgroundColor = `rgba(255, 255, 255, ${Math.min(0.8, opacity + 0.1)})`;
-                    mobileMenu.style.borderColor = `rgba(255, 255, 255, ${borderOpacity})`;
-                    mobileMenu.style.boxShadow = `0 25px 50px -12px rgba(59, 130, 246, ${shadowOpacity}), 0 0 0 1px rgba(255, 255, 255, ${borderOpacity * 0.5})`;
+                    mobileMenu.style.backgroundColor = `rgba(20, 20, 20, ${Math.min(0.45, opacity + 0.1)})`;
+                    mobileMenu.style.borderColor = `rgba(20, 20, 20, ${borderOpacity})`;
+                    mobileMenu.style.boxShadow = `0 25px 50px -12px rgba(0,0,0,${shadowOpacity}), 0 0 0 1px rgba(20,20,20,${borderOpacity * 0.5})`;
                 }
             }
 
@@ -676,13 +698,20 @@
 
             diagramPoints.forEach(point => {
                 point.addEventListener('click', () => {
+                    // Remove highlight from all points
+                    diagramPoints.forEach(p => p.classList.remove('selected'));
+                    // Highlight the clicked point
+                    point.classList.add('selected');
                     const componentKey = point.dataset.component;
                     const data = componentData[componentKey];
-
                     if (data) {
                         componentTitle.textContent = data.title;
                         componentDescription.textContent = data.description;
-                        componentSpecs.innerHTML = data.specs.map(spec => `<p class="text-slate-700 bg-slate-100 p-2 rounded-md">${spec}</p>`).join('');
+                        componentSpecs.innerHTML = data.specs.map(spec => `<p class='text-slate-700 bg-slate-100 p-2 rounded-md'>${spec}</p>`).join('');
+                    } else {
+                        componentTitle.textContent = 'Click a component';
+                        componentDescription.textContent = 'Select a point on the diagram to see its details here.';
+                        componentSpecs.innerHTML = '';
                     }
                 });
             });
@@ -733,8 +762,7 @@
                                 }
                             }
                         }
-                    }
-                });
+                    });
             }
         });
     </script>
