@@ -20,94 +20,62 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+            background-color: #f8fafc;
+            /* slate-50 */
             color: #1e293b;
-            min-height: 100vh;
+            /* slate-800 */
         }
 
         .nav-link {
             position: relative;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
 
-        .nav-link.active {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            color: white !important;
-            transform: scale(1.05);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f59e0b;
+            /* amber-500 */
+            transition: width 0.3s ease;
         }
 
+        .nav-link.active,
         .nav-link:hover {
-            transform: translateY(-1px);
+            color: #f59e0b;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        .card-gradient:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transition: all 0.3s ease;
+        .nav-link.active::after {
+            width: 100%;
         }
 
         .diagram-point {
             position: absolute;
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            width: 20px;
+            height: 20px;
+            background-color: #f59e0b;
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.2s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            border: 3px solid rgba(255, 255, 255, 0.8);
-            z-index: 20;
-            pointer-events: auto;
-            animation: diagramPulse 1.5s infinite;
-        }
-
-        @keyframes diagramPulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
-            }
-
-            70% {
-                box-shadow: 0 0 0 16px rgba(59, 130, 246, 0.1);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.0);
-            }
         }
 
         .diagram-point:hover {
-            transform: scale(1.3);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
-            background: linear-gradient(135deg, #6366f1, #a855f7);
-        }
-
-        .diagram-point.selected {
-            box-shadow: 0 0 0 4px #f59e0b, 0 8px 25px rgba(59, 130, 246, 0.6);
-            border-color: #f59e0b;
-        }
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
         }
 
         .diagram-point .plus-sign {
             color: white;
             font-weight: bold;
-            font-size: 16px;
-            line-height: 24px;
+            font-size: 14px;
+            line-height: 20px;
         }
 
         .flow-step {
@@ -161,8 +129,8 @@
         }
 
         section {
-            scroll-margin-top: 120px;
-            /* Offset for floating header */
+            scroll-margin-top: 80px;
+            /* Offset for sticky header */
         }
 
         @media (min-width: 768px) {
@@ -175,112 +143,67 @@
 
 <body class="antialiased">
 
-    <header
-        class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-6xl mx-auto px-6 transition-all duration-500">
-        <nav id="navbar"
-            class="bg-black/30 backdrop-blur-2xl rounded-2xl border border-black/20 shadow-2xl shadow-black/30 px-8 py-4 transition-all duration-500">
-            <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-                <h1
-                    class="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
-                    Team <span
-                        class="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">Njord</span>
-                </h1>
-                <div class="hidden md:flex space-x-8" id="desktop-nav">
-                    <a href="#home"
-                        class="nav-link text-slate-700 font-semibold hover:text-blue-600 transition-all duration-300 relative px-4 py-2 rounded-xl hover:bg-blue-50">Home</a>
-                    <a href="#anav"
-                        class="nav-link text-slate-700 font-semibold hover:text-purple-600 transition-all duration-300 relative px-4 py-2 rounded-xl hover:bg-purple-50">The
-                        ANAV</a>
-                    <a href="#architecture"
-                        class="nav-link text-slate-700 font-semibold hover:text-teal-600 transition-all duration-300 relative px-4 py-2 rounded-xl hover:bg-teal-50">Architecture</a>
-                    <a href="#capabilities"
-                        class="nav-link text-slate-700 font-semibold hover:text-indigo-600 transition-all duration-300 relative px-4 py-2 rounded-xl hover:bg-indigo-50">Capabilities</a>
-                    <a href="#performance"
-                        class="nav-link text-slate-700 font-semibold hover:text-emerald-600 transition-all duration-300 relative px-4 py-2 rounded-xl hover:bg-emerald-50">Performance</a>
-                    <a href="#team"
-                        class="nav-link text-slate-700 font-semibold hover:text-rose-600 transition-all duration-300 relative px-4 py-2 rounded-xl hover:bg-rose-50">Team</a>
-                </div>
-                <button id="mobile-menu-button"
-                    class="md:hidden text-slate-700 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-blue-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                </button>
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-slate-800">
+                Team <span class="text-amber-500">Njord</span>
+            </h1>
+            <div class="hidden md:flex space-x-8" id="desktop-nav">
+                <a href="#home" class="nav-link text-slate-600 font-medium">Home</a>
+                <a href="#anav" class="nav-link text-slate-600 font-medium">The ANAV</a>
+                <a href="#architecture" class="nav-link text-slate-600 font-medium">Architecture</a>
+                <a href="#capabilities" class="nav-link text-slate-600 font-medium">Capabilities</a>
+                <a href="#performance" class="nav-link text-slate-600 font-medium">Performance</a>
+                <a href="#team" class="nav-link text-slate-600 font-medium">Team</a>
             </div>
+            <button id="mobile-menu-button" class="md:hidden text-slate-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
         </nav>
-        <div id="mobile-menu"
-            class="hidden md:hidden mt-4 bg-white/20 backdrop-blur-2xl rounded-2xl border border-white/30 shadow-2xl shadow-blue-500/20 px-6 py-6 transition-all duration-500">
-            <a href="#home"
-                class="block py-3 nav-link text-slate-700 font-semibold hover:text-blue-600 transition-colors rounded-xl px-4 hover:bg-blue-50">Home</a>
-            <a href="#anav"
-                class="block py-3 nav-link text-slate-700 font-semibold hover:text-purple-600 transition-colors rounded-xl px-4 hover:bg-purple-50">The
-                ANAV</a>
-            <a href="#architecture"
-                class="block py-3 nav-link text-slate-700 font-semibold hover:text-teal-600 transition-colors rounded-xl px-4 hover:bg-teal-50">Architecture</a>
-            <a href="#capabilities"
-                class="block py-3 nav-link text-slate-700 font-semibold hover:text-indigo-600 transition-colors rounded-xl px-4 hover:bg-indigo-50">Capabilities</a>
-            <a href="#performance"
-                class="block py-3 nav-link text-slate-700 font-semibold hover:text-emerald-600 transition-colors rounded-xl px-4 hover:bg-emerald-50">Performance</a>
-            <a href="#team"
-                class="block py-3 nav-link text-slate-700 font-semibold hover:text-rose-600 transition-colors rounded-xl px-4 hover:bg-rose-50">Team</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pb-4">
+            <a href="#home" class="block py-2 nav-link text-slate-600 font-medium">Home</a>
+            <a href="#anav" class="block py-2 nav-link text-slate-600 font-medium">The ANAV</a>
+            <a href="#architecture" class="block py-2 nav-link text-slate-600 font-medium">Architecture</a>
+            <a href="#capabilities" class="block py-2 nav-link text-slate-600 font-medium">Capabilities</a>
+            <a href="#performance" class="block py-2 nav-link text-slate-600 font-medium">Performance</a>
+            <a href="#team" class="block py-2 nav-link text-slate-600 font-medium">Team</a>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 pt-24">
+    <main class="container mx-auto px-6">
 
         <section id="home" class="text-center py-20 md:py-32">
-            <div class="relative">
-                <!-- Floating background elements -->
-                <div
-                    class="absolute top-10 left-10 w-72 h-72 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse">
-                </div>
-                <div
-                    class="absolute top-32 right-10 w-72 h-72 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000">
-                </div>
-
-                <h1
-                    class="relative text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent leading-tight mb-6">
-                    Autonomous Navigation<br>Aerial Vehicle
-                </h1>
-                <p class="relative mt-6 max-w-4xl mx-auto text-xl text-slate-600 leading-relaxed">An advanced drone
-                    engineered for intelligent navigation and safe landing in complex environments. This project by Team
-                    Njord from IIIT Dharwad showcases a robust system for autonomous scanning, perception, and mission
-                    execution.</p>
-                <div
-                    class="relative mt-12 card-gradient p-10 rounded-3xl shadow-2xl border border-white/20 backdrop-blur-sm">
-                    <h2
-                        class="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                        Mission Objective</h2>
-                    <p class="text-slate-700 max-w-5xl mx-auto text-lg leading-relaxed">The core mission is to develop
-                        an ANAV capable of autonomously scanning a designated arena, identifying all potential safe
-                        landing spots based on surface characteristics, and then sequentially landing on and taking off
-                        from each ranked spot. The mission is complete once all spots have been visited, demonstrating a
-                        full cycle of perception, decision-making, and precision control in a GPS-denied environment.
-                    </p>
-                </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight">Autonomous Navigation<br>Aerial
+                Vehicle</h1>
+            <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-600">An advanced drone engineered for intelligent
+                navigation and safe landing in complex environments. This project by Team Njord from IIIT Dharwad
+                showcases a robust system for autonomous scanning, perception, and mission execution.</p>
+            <div class="mt-10 p-8 bg-white rounded-2xl shadow-xl border border-slate-200">
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">Mission Objective</h2>
+                <p class="text-slate-600 max-w-4xl mx-auto">The core mission is to develop an ANAV capable of
+                    autonomously scanning a designated arena, identifying all potential safe landing spots based on
+                    surface characteristics, and then sequentially landing on and taking off from each ranked spot. The
+                    mission is complete once all spots have been visited, demonstrating a full cycle of perception,
+                    decision-making, and precision control in a GPS-denied environment.</p>
             </div>
         </section>
 
         <section id="anav" class="py-20">
             <div class="text-center">
-                <h2
-                    class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
-                    Meet the ANAV</h2>
-                <p class="mt-4 max-w-4xl mx-auto text-xl text-slate-600 leading-relaxed">This section provides a visual
-                    and technical overview of the drone's hardware. Click on the pulsating points on the diagram to
-                    learn about the key components. The information card will update with specifications and purpose for
-                    each selected component.</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Meet the ANAV</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">This section provides a visual and technical
+                    overview of the drone's hardware. Click on the pulsating points on the diagram to learn about the
+                    key components. The information card will update with specifications and purpose for each selected
+                    component.</p>
             </div>
-            <div class="mt-16 md:grid md:grid-cols-5 md:gap-10 items-center">
-                <div class="md:col-span-3 relative mb-12 md:mb-0">
-                    <div
-                        class="aspect-w-4 aspect-h-3 card-gradient rounded-3xl p-6 flex items-center justify-center shadow-2xl relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 rounded-3xl">
-                        </div>
+            <div class="mt-12 md:grid md:grid-cols-5 md:gap-8 items-center">
+                <div class="md:col-span-3 relative mb-8 md:mb-0">
+                    <div class="aspect-w-4 aspect-h-3 bg-slate-100 rounded-2xl p-4 flex items-center justify-center">
                         <img src="assets/8d88f51ddee060fc75241ffc4950d04e.jpg" alt="Aesthetic drone in flight"
-                            class="relative max-h-full max-w-full rounded-2xl object-cover shadow-lg z-10">
+                            class="max-h-full max-w-full rounded-lg object-cover">
                         <div class="diagram-point" style="top: 20%; left: 48%;" data-component="flight-controller">
                             <div class="plus-sign">+</div>
                         </div>
@@ -298,111 +221,93 @@
                         </div>
                     </div>
                 </div>
-                <div id="component-info" class="md:col-span-2 p-8 card-gradient rounded-3xl shadow-2xl h-full">
-                    <h3 id="component-title"
-                        class="text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
-                        Click a component</h3>
-                    <p id="component-description" class="mt-4 text-slate-600 text-lg">Select a point on the diagram to
-                        see its details here.</p>
-                    <div id="component-specs" class="mt-6 space-y-3"></div>
+                <div id="component-info"
+                    class="md:col-span-2 p-6 bg-white rounded-2xl shadow-lg border border-slate-200 h-full">
+                    <h3 id="component-title" class="text-2xl font-bold text-slate-800">Click a component</h3>
+                    <p id="component-description" class="mt-2 text-slate-600">Select a point on the diagram to see its
+                        details here.</p>
+                    <div id="component-specs" class="mt-4 space-y-2"></div>
                 </div>
             </div>
         </section>
 
         <section id="architecture" class="py-20">
             <div class="text-center">
-                <h2
-                    class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-teal-600 to-indigo-600 bg-clip-text text-transparent mb-6">
-                    System Architecture</h2>
-                <p class="mt-4 max-w-4xl mx-auto text-xl text-slate-600 leading-relaxed">The ANAV's functionality is
-                    built upon a sophisticated architecture of interconnected systems. Here's a breakdown of the core
-                    components that contribute to the drone's autonomous operation.</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">System Architecture</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">The ANAV's functionality is built upon a
+                    sophisticated architecture of interconnected systems. Here's a breakdown of the core components that
+                    contribute to the drone's autonomous operation.</p>
             </div>
 
-            <div class="mt-20 space-y-20">
+            <div class="mt-16 space-y-16">
                 <div>
-                    <h3
-                        class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8 text-center">
-                        Perception & Sensing</h3>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div
-                            class="card-gradient p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <h4 class="text-2xl font-bold text-slate-800">Intel RealSense D455</h4>
-                            <p class="text-sm text-blue-600 font-semibold mt-2">Primary Perception Sensor</p>
-                            <p class="mt-4 text-slate-600 leading-relaxed">Provides synchronized RGB and depth data,
-                                crucial for 3D environment mapping, obstacle avoidance, and safe spot detection.</p>
+                    <h3 class="text-2xl font-bold text-amber-600 mb-6">Perception & Sensing</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                            <h4 class="text-xl font-bold text-slate-800">Intel RealSense D455</h4>
+                            <p class="text-sm text-amber-600 font-semibold">Primary Perception Sensor</p>
+                            <p class="mt-2 text-slate-600">Provides synchronized RGB and depth data, crucial for 3D
+                                environment mapping, obstacle avoidance, and safe spot detection.</p>
                         </div>
-                        <div
-                            class="card-gradient p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <h4 class="text-2xl font-bold text-slate-800">CS20 Solid State LiDAR</h4>
-                            <p class="text-sm text-purple-600 font-semibold mt-2">Ranging Sensor</p>
-                            <p class="mt-4 text-slate-600 leading-relaxed">A high-frequency LiDAR used for accurate
-                                altitude hold and terrain following, enhancing the reliability of depth perception.</p>
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                            <h4 class="text-xl font-bold text-slate-800">CS20 Solid State LiDAR</h4>
+                            <p class="text-sm text-amber-600 font-semibold">Ranging Sensor</p>
+                            <p class="mt-2 text-slate-600">A high-frequency LiDAR used for accurate altitude hold and
+                                terrain following, enhancing the reliability of depth perception.</p>
                         </div>
-                        <div
-                            class="card-gradient p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <h4 class="text-2xl font-bold text-slate-800">Optical Flow Sensor</h4>
-                            <p class="text-sm text-teal-600 font-semibold mt-2">Velocity Estimation</p>
-                            <p class="mt-4 text-slate-600 leading-relaxed">Measures ground velocity, enabling stable
-                                flight and accurate position holding in GPS-denied environments.</p>
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                            <h4 class="text-xl font-bold text-slate-800">Optical Flow Sensor</h4>
+                            <p class="text-sm text-amber-600 font-semibold">Velocity Estimation</p>
+                            <p class="mt-2 text-slate-600">Measures ground velocity, enabling stable flight and accurate
+                                position holding in GPS-denied environments.</p>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h3
-                        class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent mb-8 text-center">
-                        Computation & Control</h3>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div
-                            class="card-gradient p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <h4 class="text-2xl font-bold text-slate-800">NVIDIA Jetson Xavier NX</h4>
-                            <p class="text-sm text-indigo-600 font-semibold mt-2">Flight Control Computer</p>
-                            <p class="mt-4 text-slate-600 leading-relaxed">The central processing unit that runs
-                                high-level tasks like perception algorithms, path planning, and mission logic.</p>
+                    <h3 class="text-2xl font-bold text-amber-600 mb-6">Computation & Control</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                            <h4 class="text-xl font-bold text-slate-800">NVIDIA Jetson Xavier NX</h4>
+                            <p class="text-sm text-amber-600 font-semibold">Flight Control Computer</p>
+                            <p class="mt-2 text-slate-600">The central processing unit that runs high-level tasks like
+                                perception algorithms, path planning, and mission logic.</p>
                         </div>
-                        <div
-                            class="card-gradient p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <h4 class="text-2xl font-bold text-slate-800">Cube Orange+ Flight Controller</h4>
-                            <p class="text-sm text-emerald-600 font-semibold mt-2">Flight Management System</p>
-                            <p class="mt-4 text-slate-600 leading-relaxed">Manages low-level flight control, executing
-                                commands from the main computer and ensuring stable flight.</p>
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                            <h4 class="text-xl font-bold text-slate-800">Cube Orange+ Flight Controller</h4>
+                            <p class="text-sm text-amber-600 font-semibold">Flight Management System</p>
+                            <p class="mt-2 text-slate-600">Manages low-level flight control, executing commands from the
+                                main computer and ensuring stable flight.</p>
                         </div>
-                        <div
-                            class="card-gradient p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <h4 class="text-2xl font-bold text-slate-800">Holybro Sik Telemetry Radio</h4>
-                            <p class="text-sm text-cyan-600 font-semibold mt-2">Communication Link</p>
-                            <p class="mt-4 text-slate-600 leading-relaxed">Provides a reliable data link between the
-                                ANAV and the Ground Control Station (GCS).</p>
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                            <h4 class="text-xl font-bold text-slate-800">Holybro Sik Telemetry Radio</h4>
+                            <p class="text-sm text-amber-600 font-semibold">Communication Link</p>
+                            <p class="mt-2 text-slate-600">Provides a reliable data link between the ANAV and the Ground
+                                Control Station (GCS).</p>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h3
-                        class="text-3xl font-bold bg-gradient-to-r from-rose-600 to-orange-600 bg-clip-text text-transparent mb-8 text-center">
-                        Propulsion & Power</h3>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div
-                            class="card-gradient p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <h4 class="text-2xl font-bold text-slate-800">T-Motor F1000</h4>
-                            <p class="text-sm text-rose-600 font-semibold mt-2">Motors</p>
-                            <p class="mt-4 text-slate-600 leading-relaxed">High-efficiency brushless motors selected for
-                                their thrust-to-weight ratio and reliability.</p>
+                    <h3 class="text-2xl font-bold text-amber-600 mb-6">Propulsion & Power</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                            <h4 class="text-xl font-bold text-slate-800">T-Motor F1000</h4>
+                            <p class="text-sm text-amber-600 font-semibold">Motors</p>
+                            <p class="mt-2 text-slate-600">High-efficiency brushless motors selected for their
+                                thrust-to-weight ratio and reliability.</p>
                         </div>
-                        <div
-                            class="card-gradient p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <h4 class="text-2xl font-bold text-slate-800">28-inch Propellers</h4>
-                            <p class="text-sm text-orange-600 font-semibold mt-2">Propellers</p>
-                            <p class="mt-4 text-slate-600 leading-relaxed">Large propellers matched with the motors to
-                                maximize efficiency and provide stable lift.</p>
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                            <h4 class="text-xl font-bold text-slate-800">28-inch Propellers</h4>
+                            <p class="text-sm text-amber-600 font-semibold">Propellers</p>
+                            <p class="mt-2 text-slate-600">Large propellers matched with the motors to maximize
+                                efficiency and provide stable lift.</p>
                         </div>
-                        <div
-                            class="card-gradient p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <h4 class="text-2xl font-bold text-slate-800">6S LiPo Battery</h4>
-                            <p class="text-sm text-amber-600 font-semibold mt-2">Power Source</p>
-                            <p class="mt-4 text-slate-600 leading-relaxed">A high-capacity Lithium Polymer battery
-                                provides the necessary power for all onboard systems.</p>
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                            <h4 class="text-xl font-bold text-slate-800">6S LiPo Battery</h4>
+                            <p class="text-sm text-amber-600 font-semibold">Power Source</p>
+                            <p class="mt-2 text-slate-600">A high-capacity Lithium Polymer battery provides the
+                                necessary power for all onboard systems.</p>
                         </div>
                     </div>
                 </div>
@@ -574,39 +479,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Navbar scroll effect
-            const navbar = document.getElementById('navbar');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            function updateNavbarOpacity() {
-                const scrollY = window.scrollY;
-                const maxScroll = 300; // Reduced for faster transition
-
-                // Calculate opacity based on scroll position (0.2 to 0.85)
-                const opacity = Math.min(0.55, 0.18 + (scrollY / maxScroll) * 0.37);
-                // Lower border and shadow opacity for more glass effect
-                const borderOpacity = Math.min(0.32, 0.12 + (scrollY / maxScroll) * 0.17);
-                const shadowOpacity = Math.min(0.22, 0.09 + (scrollY / maxScroll) * 0.13);
-
-                if (navbar) {
-                    navbar.style.backgroundColor = `rgba(20, 20, 20, ${opacity})`;
-                    navbar.style.borderColor = `rgba(20, 20, 20, ${borderOpacity})`;
-                    navbar.style.boxShadow = `0 25px 50px -12px rgba(0,0,0,${shadowOpacity}), 0 0 0 1px rgba(20,20,20,${borderOpacity * 0.5})`;
-                }
-
-                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.style.backgroundColor = `rgba(20, 20, 20, ${Math.min(0.45, opacity + 0.1)})`;
-                    mobileMenu.style.borderColor = `rgba(20, 20, 20, ${borderOpacity})`;
-                    mobileMenu.style.boxShadow = `0 25px 50px -12px rgba(0,0,0,${shadowOpacity}), 0 0 0 1px rgba(20,20,20,${borderOpacity * 0.5})`;
-                }
-            }
-
-            // Update navbar on scroll
-            window.addEventListener('scroll', updateNavbarOpacity);
-
-            // Initial call
-            updateNavbarOpacity();
-
             // Component Data
             const componentData = {
                 'flight-controller': {
@@ -649,6 +521,7 @@
 
             // Mobile Menu
             const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
@@ -698,20 +571,13 @@
 
             diagramPoints.forEach(point => {
                 point.addEventListener('click', () => {
-                    // Remove highlight from all points
-                    diagramPoints.forEach(p => p.classList.remove('selected'));
-                    // Highlight the clicked point
-                    point.classList.add('selected');
                     const componentKey = point.dataset.component;
                     const data = componentData[componentKey];
+
                     if (data) {
                         componentTitle.textContent = data.title;
                         componentDescription.textContent = data.description;
-                        componentSpecs.innerHTML = data.specs.map(spec => `<p class='text-slate-700 bg-slate-100 p-2 rounded-md'>${spec}</p>`).join('');
-                    } else {
-                        componentTitle.textContent = 'Click a component';
-                        componentDescription.textContent = 'Select a point on the diagram to see its details here.';
-                        componentSpecs.innerHTML = '';
+                        componentSpecs.innerHTML = data.specs.map(spec => `<p class="text-slate-700 bg-slate-100 p-2 rounded-md">${spec}</p>`).join('');
                     }
                 });
             });
@@ -762,7 +628,8 @@
                                 }
                             }
                         }
-                    });
+                    }
+                });
             }
         });
     </script>
