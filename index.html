@@ -153,7 +153,7 @@
                 <a href="#anav" class="nav-link text-slate-600 font-medium">The ANAV</a>
                 <a href="#architecture" class="nav-link text-slate-600 font-medium">Architecture</a>
                 <a href="#capabilities" class="nav-link text-slate-600 font-medium">Capabilities</a>
-                <a href="#performance" class="nav-link text-slate-600 font-medium">Performance</a>
+                <!-- <a href="#performance" class="nav-link text-slate-600 font-medium">Performance</a> -->
                 <a href="#team" class="nav-link text-slate-600 font-medium">Team</a>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-slate-700">
@@ -168,7 +168,7 @@
             <a href="#anav" class="block py-2 nav-link text-slate-600 font-medium">The ANAV</a>
             <a href="#architecture" class="block py-2 nav-link text-slate-600 font-medium">Architecture</a>
             <a href="#capabilities" class="block py-2 nav-link text-slate-600 font-medium">Capabilities</a>
-            <a href="#performance" class="block py-2 nav-link text-slate-600 font-medium">Performance</a>
+            <!-- <a href="#performance" class="block py-2 nav-link text-slate-600 font-medium">Performance</a> -->
             <a href="#team" class="block py-2 nav-link text-slate-600 font-medium">Team</a>
         </div>
     </header>
@@ -361,7 +361,7 @@
             </div>
         </section>
 
-        <section id="performance" class="py-20">
+        <!-- <section id="performance" class="py-20">
             <div class="text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Performance & Testing</h2>
                 <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">A robust design is only as good as its tested
@@ -376,7 +376,7 @@
                     <canvas id="performanceChart"></canvas>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <section id="team" class="py-20">
             <div class="text-center">
@@ -475,6 +475,33 @@
             <p>&copy; 2025 Team Njord - Indian Institute of Information Technology, Dharwad</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Floating Navbar Opacity Effect
+            const navbar = document.getElementById('navbar');
+            const mobileMenu = document.getElementById('mobile-menu');
+            function updateNavbarOpacity() {
+                const scrollY = window.scrollY;
+                const maxScroll = 300;
+                const opacity = Math.min(0.55, 0.18 + (scrollY / maxScroll) * 0.37);
+                const borderOpacity = Math.min(0.32, 0.12 + (scrollY / maxScroll) * 0.17);
+                const shadowOpacity = Math.min(0.22, 0.09 + (scrollY / maxScroll) * 0.13);
+                if (navbar) {
+                    navbar.style.backgroundColor = `rgba(20, 20, 20, ${opacity})`;
+                    navbar.style.borderColor = `rgba(20, 20, 20, ${borderOpacity})`;
+                    navbar.style.boxShadow = `0 25px 50px -12px rgba(0,0,0,${shadowOpacity}), 0 0 0 1px rgba(20,20,20,${borderOpacity * 0.5})`;
+                }
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.style.backgroundColor = `rgba(20, 20, 20, ${Math.min(0.45, opacity + 0.1)})`;
+                    mobileMenu.style.borderColor = `rgba(20, 20, 20, ${borderOpacity})`;
+                    mobileMenu.style.boxShadow = `0 25px 50px -12px rgba(0,0,0,${shadowOpacity}), 0 0 0 1px rgba(20,20,20,${borderOpacity * 0.5})`;
+                }
+            }
+            window.addEventListener('scroll', updateNavbarOpacity);
+            updateNavbarOpacity();
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
