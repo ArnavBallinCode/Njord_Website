@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Show navbar on mobile as a horizontal scrollable bar */
         @media (max-width: 767px) {
@@ -55,7 +55,7 @@
         }
 
         body {
-            font-family: 'Lora', serif;
+            font-family: 'TikTok Sans', sans-serif;
             font-weight: 400;
             background-color: #f8fafc;
             /* slate-50 */
@@ -179,10 +179,12 @@
 </head>
 
 <body class="antialiased">
-    <div class="absolute top-8 left-10 text-2xl font-bold text-black z-30">Njord</div>
-    <div class="absolute top-8 right-10 z-30">
+    <div class="absolute top-8 left-10 z-30">
+        <img src="assets\Njord_logo.png" alt="Njord Logo" class="h-40 w-auto transition-transform duration-300 hover:scale-105 -mt-8">
+    </div>
+    <div class="absolute top-12 right-10 z-30">
         <a href="https://iiitdwd.ac.in/" target="_blank" title="Visit IIIT Dharwad Website">
-            <img src="assets\college_logo\iiitdwd-removedbg.png" alt="IIIT Dharwad Logo" class="h-20 w-auto transition-transform duration-300 hover:scale-105">  
+            <img src="assets\college_logo\iiitdwd-removedbg.png" alt="IIIT Dharwad Logo" class="h-20 w-auto transition-transform duration-300 hover:scale-105 -mt-4">  
         </a>
     </div>
     <header class="bg-transparent sticky top-0 z-40">
@@ -228,11 +230,11 @@
                 navigation and safe landing in complex environments. This project by Team Njord from IIIT Dharwad
                 showcases a robust system for autonomous scanning, perception, and mission execution.</p>
             <div class="mt-10 p-8 bg-white rounded-2xl shadow-xl border border-slate-200">
-                <h2 class="text-3xl font-bold mb-4 text-slate-800">Mission Objective</h2>
-                <p class="text-slate-600 max-w-4xl mx-auto">The core mission is to develop an ANAV capable of
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">Objective</h2>
+                <p class="text-slate-600 max-w-4xl mx-auto">The core objective is to develop an ANAV capable of
                     autonomously scanning a designated arena, identifying all potential safe landing spots based on
                     surface characteristics, and then sequentially landing on and taking off from each ranked spot. The
-                    mission is complete once all spots have been visited, demonstrating a full cycle of perception,
+                    objective is complete once all spots have been visited, demonstrating a full cycle of perception,
                     decision-making, and precision control in a GPS-denied environment.</p>
             </div>
         </section>
@@ -314,7 +316,7 @@
                     <h3 class="text-2xl font-bold text-[#0D9488] mb-6">Computation & Control</h3>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
-                            <h4 class="text-xl font-bold text-slate-800">NVIDIA Jetson Xavier NX</h4>
+                            <h4 class="text-xl font-bold text-slate-800">NVIDIA Jetson Orin Nano</h4>
                             <p class="text-sm text-[#0D9488] font-semibold">Flight Control Computer</p>
                             <p class="mt-2 text-slate-600">The central processing unit that runs high-level tasks like
                                 perception algorithms, path planning, and mission logic.</p>
@@ -338,19 +340,19 @@
                     <h3 class="text-2xl font-bold text-[#0D9488] mb-6">Propulsion & Power</h3>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
-                            <h4 class="text-xl font-bold text-slate-800">T-Motor F1000</h4>
+                            <h4 class="text-xl font-bold text-slate-800">Holybro 2216 KV920 Motor</h4>
                             <p class="text-sm text-[#0D9488] font-semibold">Motors</p>
                             <p class="mt-2 text-slate-600">High-efficiency brushless motors selected for their
                                 thrust-to-weight ratio and reliability.</p>
                         </div>
                         <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
-                            <h4 class="text-xl font-bold text-slate-800">28-inch Propellers</h4>
+                            <h4 class="text-xl font-bold text-slate-800">1045 Propellers</h4>
                             <p class="text-sm text-[#0D9488] font-semibold">Propellers</p>
                             <p class="mt-2 text-slate-600">Large propellers matched with the motors to maximize
                                 efficiency and provide stable lift.</p>
                         </div>
                         <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
-                            <h4 class="text-xl font-bold text-slate-800">6S LiPo Battery</h4>
+                            <h4 class="text-xl font-bold text-slate-800">4S LiPo Battery</h4>
                             <p class="text-sm text-[#0D9488] font-semibold">Power Source</p>
                             <p class="mt-2 text-slate-600">A high-capacity Lithium Polymer battery provides the
                                 necessary power for all onboard systems.</p>
@@ -365,7 +367,7 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Autonomous Capabilities</h2>
                 <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">The true innovation lies in the software and
                     autonomous decision-making processes. This section outlines the step-by-step logic the drone follows
-                    to successfully complete its mission.</p>
+                    to successfully complete its objective.</p>
             </div>
             <div class="mt-12 grid md:grid-cols-2 gap-8 md:gap-12 items-start">
                 <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
@@ -376,7 +378,7 @@
                         control.</p>
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold text-slate-800 mb-6">Mission Execution Flow</h3>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6">Execution Flow</h3>
                     <div class="space-y-8">
                         <div class="flow-step">
                             <div class="flow-step-dot"></div>
@@ -416,7 +418,7 @@
             <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6 md:gap-8">
                 <div class="team-card text-center group">
                     <div class="relative inline-block">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726a?q=80&w=400&auto=format&fit=crop"
+                        <img src="assets\People\Krishna.jpg"
                             alt="Krishna" class="rounded-2xl shadow-lg w-32 h-32 md:w-40 md:h-40 mx-auto object-cover">
                         <div
                             class="overlay absolute inset-0 bg-slate-800 bg-opacity-80 rounded-2xl flex items-center justify-center p-4">
@@ -440,7 +442,7 @@
                 </div>
                 <div class="team-card text-center group">
                     <div class="relative inline-block">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726a?q=80&w=400&auto=format&fit=crop"
+                        <img src="assets\People\Amith.jpg"
                             alt="Amith" class="rounded-2xl shadow-lg w-32 h-32 md:w-40 md:h-40 mx-auto object-cover">
                         <div
                             class="overlay absolute inset-0 bg-slate-800 bg-opacity-80 rounded-2xl flex items-center justify-center p-4">
@@ -451,7 +453,7 @@
                 </div>
                 <div class="team-card text-center group">
                     <div class="relative inline-block">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726a?q=80&w=400&auto=format&fit=crop"
+                        <img src="assets\People\Saurav.jpg"
                             alt="Saurav" class="rounded-2xl shadow-lg w-32 h-32 md:w-40 md:h-40 mx-auto object-cover">
                         <div
                             class="overlay absolute inset-0 bg-slate-800 bg-opacity-80 rounded-2xl flex items-center justify-center p-4">
@@ -463,7 +465,7 @@
                 </div>
                 <div class="team-card text-center group">
                     <div class="relative inline-block">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726a?q=80&w=400&auto=format&fit=crop"
+                        <img src="assets\People\Lohith.jpg"
                             alt="Lohith" class="rounded-2xl shadow-lg w-32 h-32 md:w-40 md:h-40 mx-auto object-cover">
                         <div
                             class="overlay absolute inset-0 bg-slate-800 bg-opacity-80 rounded-2xl flex items-center justify-center p-4">
@@ -485,7 +487,7 @@
                 </div>
                 <div class="team-card text-center group">
                     <div class="relative inline-block">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726a?q=80&w=400&auto=format&fit=crop"
+                        <img src="assets\People\Ranjith.jpg"
                             alt="Ranjith" class="rounded-2xl shadow-lg w-32 h-32 md:w-40 md:h-40 mx-auto object-cover">
                         <div
                             class="overlay absolute inset-0 bg-slate-800 bg-opacity-80 rounded-2xl flex items-center justify-center p-4">
@@ -541,7 +543,7 @@
                     description: 'The brain of the operation. It consists of the Cube Orange+ for low-level flight management and the NVIDIA Jetson for high-level autonomous tasks.',
                     specs: [
                         '<b>Flight Manager:</b> Cube Orange+',
-                        '<b>Companion Computer:</b> NVIDIA Jetson Xavier NX',
+                        '<b>Companion Computer:</b> NVIDIA Jetson Orin Nano',
                         '<b>Function:</b> Processes sensor data, runs navigation algorithms, and controls the motors.'
                     ]
                 },
@@ -549,8 +551,8 @@
                     title: 'Propulsion System',
                     description: 'The system responsible for generating thrust, allowing the ANAV to lift off, maneuver, and maintain flight.',
                     specs: [
-                        '<b>Motors:</b> T-Motor F1000',
-                        '<b>Propellers:</b> 28-inch carbon fiber',
+                        '<b>Motors:</b> Holybro 2216 KV920 Motor',
+                        '<b>Propellers:</b> 1045 Propellers',
                         '<b>Function:</b> Provides powerful and efficient thrust for stable flight and payload capacity.'
                     ]
                 },
@@ -560,7 +562,7 @@
                     specs: [
                         '<b>Primary:</b> Intel RealSense D455 (RGB-D)',
                         '<b>Secondary:</b> CS20 Solid State LiDAR',
-                        '<b>Supporting:</b> Optical Flow, IMU, Barometer',
+                        '<b>Supporting:</b> Optical Flow and Rangefinder',
                         '<b>Function:</b> Enables obstacle avoidance, terrain mapping, and safe spot detection.'
                     ]
                 },
@@ -568,7 +570,7 @@
                     title: 'Power System',
                     description: 'Provides the necessary electrical power to all onboard components, from the high-torque motors to the sensitive computational units.',
                     specs: [
-                        '<b>Battery Type:</b> 6S Lithium Polymer (LiPo)',
+                        '<b>Battery Type:</b> 4S Lithium Polymer (LiPo)',
                         '<b>Function:</b> Delivers sustained, high-current power for the entire duration of the mission.'
                     ]
                 }
