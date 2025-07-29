@@ -18,6 +18,49 @@
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
+        /* Show navbar on mobile as a horizontal scrollable bar */
+        @media (max-width: 767px) {
+            header {
+                padding-top: 56px;
+            }
+
+            #desktop-nav {
+                display: flex !important;
+                flex-wrap: nowrap;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                z-index: 50;
+                background: rgba(20, 20, 20, 0.65);
+                backdrop-filter: blur(16px);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+                border-bottom: 1px solid rgba(40, 40, 40, 0.18);
+                padding: 0.18rem 0.18rem;
+                border-radius: 0 0 10px 10px;
+                justify-content: center;
+                gap: 0.04rem;
+                overflow-x: unset;
+            }
+
+            #desktop-nav a {
+                color: #fff;
+                font-size: 0.68rem;
+                padding: 0.13rem 0.32rem;
+                border-radius: 4px;
+                background: rgba(40, 40, 40, 0.18);
+                white-space: nowrap;
+                margin: 0 0.04rem;
+                transition: background 0.2s, color 0.2s;
+            }
+
+            #desktop-nav a.active,
+            #desktop-nav a:hover {
+                color: #f59e0b;
+                background: rgba(40, 40, 40, 0.32);
+            }
+        }
+
         body {
             font-family: 'Spectral', serif;
             font-weight: 400;
